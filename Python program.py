@@ -6,3 +6,4 @@ print(f'My name is {name}, I am {age} years old')
 address = 'Binh Duong'
 country = 'Viet Nam'
 print(f'My address is {address} province, {country}')
+print('Nice to meet you!')
