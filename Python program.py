@@ -45,19 +45,57 @@
 #         print(e, end='\n')
 
 
+# import re
+
+# # Define function 
+# def Search_pattern(pattern, string):
+#     result = re.findall(pattern, string) 
+#     if not result:
+#         print(-1)
+#     else:
+#         for element in result:
+#             print(element, end='\n')
+
+# if __name__ == "__main__":
+#     pattern = r'(?<=[qwrtypsdfghjklzxcvbnmQWRTYPSDFGHJKLZXCVBNM])([aeiouAEIOU]{2,})(?=[qwrtypsdfghjklzxcvbnmQWRTYPSDFGHJKLZXCVBNM])'
+#     string = input()
+    
+#     Search_pattern(pattern, string)
+
+# import re
+
+# string = '123456789'
+# m = re.search('45', string)
+# print(m.end())
+# print(m.start())
+
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+
 import re
 
-# Define function 
-def Search_pattern(pattern, string):
-    result = re.findall(pattern, string) 
-    if not result:
-        print(-1)
-    else:
-        for element in result:
-            print(element, end='\n')
-
-if __name__ == "__main__":
-    pattern = r'(?<=[qwrtypsdfghjklzxcvbnmQWRTYPSDFGHJKLZXCVBNM])([aeiouAEIOU]{2,})(?=[qwrtypsdfghjklzxcvbnmQWRTYPSDFGHJKLZXCVBNM])'
+if __name__ == '__main__':
     string = input()
+    sub_str = input()
     
-    Search_pattern(pattern, string)
+    l = len(sub_str)
+    result = []
+    pos = re.search(sub_str, string)
+    if pos:
+        start = pos.start()
+        end = pos.end()-1
+        result.append(tuple([start, end]))
+        while (len(string) >= l):
+            new_string = string[start+1:]
+            pos = re.search(sub_str, new_string)
+            if pos:
+                start = start + pos.start() + 1
+                end = end + pos.end() - 1
+                result.append(tuple([start, end]))
+            else:
+                break
+        
+    if not result:
+        result.append(tuple([-1, -1]))
+    else:
+        for e in result:
+            print(e, end='\n')
